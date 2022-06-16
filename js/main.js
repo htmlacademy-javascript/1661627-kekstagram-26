@@ -47,7 +47,7 @@ const createRandomComments = () => ({
   name: getRandomArrEl(NAMES),
 });
 
-const createPhotosRandom = () => Array.form({length: PHOTO_AMOUNT}, (item, index) => ({
+const createPhotosRandom = () => Array.from({length: PHOTO_AMOUNT}, (item, index) => ({
   id: index + 1,
   url: `photos/${index + 1}.jpg`,
   description: getRandomArrEl(DESCRIPTIONS),
