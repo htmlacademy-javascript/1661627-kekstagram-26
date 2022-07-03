@@ -1,4 +1,5 @@
+import {getRandomArrEl} from './util.js';
+import './photo-thumbnails.js';
 
-import {createRandomPhotos} from './data.js';
-createRandomPhotos();
+getRandomArrEl();
 
