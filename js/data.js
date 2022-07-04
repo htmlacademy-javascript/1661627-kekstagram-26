@@ -39,9 +39,5 @@ const createRandomPhotos = () => Array.from({length: PHOTO_AMOUNT}, (item, index
   likes: getRandomValues(likeValue.MIN, likeValue.MAX),
   comments: Array.from({length: getRandomValues(CommentsValue.MIN, CommentsValue.MAX)}, createRandomComments)
 }));
-createRandomPhotos();
-
-const getStringLength = (str, maxLength) => str.length <= maxLength;
-getStringLength('Some very long text', 40);
 
 export {createRandomPhotos};

@@ -6,4 +6,7 @@ const getRandomValues = () => {
 
 const getRandomArrEl = (el) => el[getRandomValues(0, el.length - 1)];
 
-export {getRandomValues, getRandomArrEl};
+const getStringLength = (str, maxLength) => str.length <= maxLength;
+getStringLength('Some very long text', 40);
+
+export {getRandomValues, getRandomArrEl, getStringLength};
