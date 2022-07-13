@@ -1,5 +1,5 @@
-import {escapeButton} from './util';
-import {fullSizePic} from './fullsize-picture';
+import {escapeButton} from './util.js';
+import {fullSizePic} from './fullsize-picture.js';
 
 const body = document.body;
 

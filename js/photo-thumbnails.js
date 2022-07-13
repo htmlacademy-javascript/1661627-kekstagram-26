@@ -7,14 +7,14 @@ const displayPosts = (posts) => {
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const picturesFragment = document.createDocumentFragment();
 
-  posts.forEach((url, comments, likes) => {
+  posts.forEach(({url, comments, likes, description}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.addEventListener('click', () => {
       openModal();
-      displayPost(posts);
+      displayPost({url, comments, likes, description});
     });
     picturesFragment.append(pictureElement);
   });

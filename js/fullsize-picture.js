@@ -23,27 +23,32 @@ const createCommentItem = ({avatar, name, message}) => {
 
 const displayComments = (comments) => {
   const commentListFragment = document.createDocumentFragment();
-  comments.forEach((comment) => {
-    commentListFragment.append(createCommentItem(comment));
+  comments.forEach(({avatar, name, message}) => {
+    commentListFragment.append(createCommentItem({avatar, name, message}));
   });
   commentsList.innerHTML = '';
   commentsList.append(commentListFragment);
 };
 
-const displayPost = ({url, description, comments, likes}) => {
+const displayPost = ({url, likes, comments, description}) => {
   fullSizePic.querySelector('.big-picture__img img').src = url;
   fullSizePic.querySelector('.likes-count').textContent = likes;
   fullSizePic.querySelector('.comments-count').textContent = comments.length;
   fullSizePic.querySelector('.social__caption').textContent = description;
-  displayComments();
+  displayComments(comments);
   openModal(fullSizePic);
 
-  commentCount.classList.remove('hidden');
-  commentLoaderEl.classList.remove('hidden');
+  commentCount.classList.add('hidden');
+  commentLoaderEl.classList.add('hidden');
+  document.body.classList.add('modal-open');
+
 };
 
 closeFullSizePic.addEventListener('click', () => {
   closeModal();
+  commentCount.classList.remove('hidden');
+  commentLoaderEl.classList.remove('hidden');
+  document.body.classList.remove('modal-open');
 });
 
 export {fullSizePic, displayPost};
