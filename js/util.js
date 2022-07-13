@@ -13,4 +13,6 @@ const getRandomArrEl = (el) => {
 const getStringLength = (str, maxLength) => str.length <= maxLength;
 getStringLength('Some very long text', 40);
 
-export {getRandomValues, getRandomArrEl, getStringLength};
+const escapeButton = (evt) => evt.key === 'Escape';
+
+export {getRandomValues, getRandomArrEl, getStringLength, escapeButton};

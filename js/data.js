@@ -1,4 +1,4 @@
-import {getRandomValues,getRandomArrEl} from './util.js';
+import {getRandomValues, getRandomArrEl} from './util.js';
 
 const PHOTO_AMOUNT = 25;
 
@@ -32,7 +32,7 @@ const createRandomComments = () => ({
   name: getRandomArrEl(NAMES),
 });
 
-const createRandomPhotos = () => Array.from({length: PHOTO_AMOUNT}, (item, index) => ({
+const createRandomPosts = () => Array.from({length: PHOTO_AMOUNT}, (item, index) => ({
   id: index + 1,
   url: `photos/${index + 1}.jpg`,
   description: getRandomArrEl(DESCRIPTIONS),
@@ -40,4 +40,4 @@ const createRandomPhotos = () => Array.from({length: PHOTO_AMOUNT}, (item, index
   comments: Array.from({length: getRandomValues(CommentsValue.MIN, CommentsValue.MAX)}, createRandomComments)
 }));
 
-export {createRandomPhotos};
+export {createRandomPosts, PHOTO_AMOUNT};

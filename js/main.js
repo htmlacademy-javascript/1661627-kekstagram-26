@@ -1,5 +1,6 @@
-import {getRandomArrEl} from './util.js';
-import './photo-thumbnails.js';
+import {PHOTO_AMOUNT, createRandomPosts} from './data.js';
+import {displayPosts} from './photo-thumbnails.js';
 
-getRandomArrEl();
+const renderPost = createRandomPosts(PHOTO_AMOUNT);
 
+displayPosts(renderPost);

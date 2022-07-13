@@ -1,19 +1,24 @@
-import {createRandomPhotos} from './data.js';
+import {openModal} from './pop-up.js';
+import {displayPost} from './fullsize-picture.js';
 
-const picturesBox = document.querySelector('.pictures');
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const displayPosts = (posts) => {
 
-const photoData = createRandomPhotos();
+  const picturesBox = document.querySelector('.pictures');
+  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  const picturesFragment = document.createDocumentFragment();
 
-const picturesFragment = document.createDocumentFragment();
+  posts.forEach((url, comments, likes) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.addEventListener('click', () => {
+      openModal();
+      displayPost(posts);
+    });
+    picturesFragment.append(pictureElement);
+  });
 
-photoData.forEach(({url, comments, likes}) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  picturesFragment.append(pictureElement);
-});
-picturesBox.append(picturesFragment);
-
-
+  picturesBox.append(picturesFragment);
+};
+export {displayPosts};
