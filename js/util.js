@@ -16,3 +16,4 @@ getStringLength('Some very long text', 40);
 const escapeButton = (evt) => evt.key === 'Escape';
 
 export {getRandomValues, getRandomArrEl, getStringLength, escapeButton};
+
