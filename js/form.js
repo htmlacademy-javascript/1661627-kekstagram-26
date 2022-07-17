@@ -1,4 +1,5 @@
 import {getStringLength, escapeButton} from './util.js';
+import {closeModal} from './pop-up.js';
 
 const HASHTAGS = 5;
 const DESCRIPTION = 140;
@@ -11,6 +12,18 @@ const editForm = uploadForm.querySelector('.img-upload__overlay');
 const hashtagsElem = uploadForm.querySelector('.text__hashtags');
 const description = uploadForm.querySelector('.text__description');
 
+const resetForm = () => uploadForm.reset();
+
+uploadImage.addEventListener('change', () => {
+  editForm.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', (evt) => {
+    if (escapeButton(evt)) {
+      evt.preventDefault();
+      editForm.classList.add('hidden');
+    }
+  });
+});
 
 function onPopupKeyDownEsc(evt) {
   if (escapeButton(evt)) {
@@ -19,19 +32,9 @@ function onPopupKeyDownEsc(evt) {
   }
 }
 
-function openUploadForm() {
-  uploadImage.addEventListener('change', () => {
-    editForm.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-  });
-  document.addEventListener('keydown', onPopupKeyDownEsc);
-}
-
 function closeUploadForm() {
-  editForm.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  document.addEventListener('keydown', onPopupKeyDownEsc);
-  uploadImage.value = '';
+  closeModal();
+  resetForm();
 }
 
 closeEditForm.addEventListener('click', () => {
@@ -64,7 +67,7 @@ const checkUniquenessHashtags = () => {
   return hashtags.length === uniqueHashtags.size;
 };
 
-const checkHashtagsCount = () => getHashtags().length < HASHTAGS;
+const checkHashtagsCount = () => getHashtags().length <= HASHTAGS;
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'text__field-wrapper',
@@ -75,9 +78,9 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'text__error-message'
 });
 
-pristine.addValidator(hashtagsElem, checkHashtagSymbols, 'Хэш-тег должен начинаться с символа #, содержать только буквы и числа. Максимальная длина одного хэш-тега 20 символов.', 1, true);
-pristine.addValidator(hashtagsElem, checkUniquenessHashtags, 'Хэш-теги не должны повторяться. Хэштеги нечувствительны к регистру.', 2, true);
-pristine.addValidator(hashtagsElem, checkHashtagsCount, `Можно указать не более ${HASHTAGS} хэш-тегов.`, 3, true);
+pristine.addValidator(hashtagsElem, checkHashtagSymbols, 'Хэш-тег должен начинаться с символа #, содержать только буквы и числа. Максимальная длина одного хэш-тега 20 символов.');
+pristine.addValidator(hashtagsElem, checkUniquenessHashtags, 'Хэш-теги не должны повторяться. Хэштеги нечувствительны к регистру.');
+pristine.addValidator(hashtagsElem, checkHashtagsCount, `Можно указать не более ${HASHTAGS} хэш-тегов.`);
 pristine.addValidator(description, checkDescription, `Максимальная длина комментария ${DESCRIPTION} символов.`);
 
 uploadForm.addEventListener('submit', (evt) => {
@@ -88,4 +91,3 @@ uploadForm.addEventListener('submit', (evt) => {
   }
 });
 
-export {openUploadForm};
