@@ -1,12 +1,9 @@
 import {openModal} from './pop-up.js';
 import {displayPost} from './fullsize-picture.js';
 
-const displayPosts = (posts) => {
-
   const picturesBox = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const picturesFragment = document.createDocumentFragment();
-
   posts.forEach(({url, comments, likes, description}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
@@ -18,7 +15,6 @@ const displayPosts = (posts) => {
     });
     picturesFragment.append(pictureElement);
   });
-
   picturesBox.append(picturesFragment);
 };
 export {displayPosts};
